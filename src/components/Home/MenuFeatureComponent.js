@@ -8,7 +8,7 @@ export default class MenuFeatureComponent extends Component {
             <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
                 <View style={{ justifyContent: 'flex-start', flexDirection: 'row', width: '100%', flexWrap: 'wrap',marginVertical:20}}>
                     <MenusFeatureComponent title="Jadwal Sholat" icon={require('../../assets/icon/time.png')} navigation={this.props.navigation} routeName="PrayerTimeScreen"/>
-                    <MenusFeatureComponent title="Al-Quran" icon={require('../../assets/icon/quran.png')}/>
+                    <MenusFeatureComponent title="Al-Quran" icon={require('../../assets/icon/quran.png')} navigation={this.props.navigation} routeName="SurahScreen"/>
                     <MenusFeatureComponent title="Kisah Nabi" icon={require('../../assets/icon/story.png')}/>
                     <MenusFeatureComponent title="Artikel" icon={require('../../assets/icon/story.png')}/>
                     <MenusFeatureComponent title="Toko Halal" icon={require('../../assets/icon/story.png')}/>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Image, ScrollView, StyleSheet, Text, View } from 'react-native'
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import {alarmOnColor,alarmOffColor} from '../../const/color'
@@ -8,8 +8,15 @@ export default class PrayerTimeComponent extends Component {
     render() {
         return (
             <View>
-                <View style={style.clockPrayer}>
-                    <Text>Test</Text>
+                <View style={style.containerCountdownPrayer}>
+                    <View style={{width:'100%',height:'100%',position:'absolute',top:0}}>
+                        <Image source={require('../../assets/img/night.jpg')} style={{width:undefined,height:undefined,flex:1}} resizeMode='cover'/>
+                    </View>
+                    <View style={{position:'absolute',backgroundColor:'#000',opacity:0.2,width: '100%', height: '100%'}}></View>
+                    <View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
+                        <Text style={{fontSize:32,color:'white'}}>Isya akan tiba</Text>
+                        <Text style={{fontSize:20,color:'white'}}>00:30:00</Text>
+                    </View>
                 </View>
                 <View style={style.listPrayer}>
                     <ScrollView>
@@ -45,7 +52,8 @@ export default class PrayerTimeComponent extends Component {
 }
 
 const style = StyleSheet.create({
-    clockPrayer: {
+    containerCountdownPrayer: {
+        position:'relative',
         height: '50%',
         backgroundColor: 'blue'
     },

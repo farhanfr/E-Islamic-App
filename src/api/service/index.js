@@ -7,4 +7,9 @@ const JadwalSholatServices = () =>{
     return{getAll}
 }
 
-export{JadwalSholatServices}
+const AlQuranServices = () =>{
+    const getAllSurah = async() => await axios.get(`${MAIN_API}/quran/format/json/surat`)
+    return{getAllSurah}
+}
+
+export{JadwalSholatServices,AlQuranServices}

@@ -4,5 +4,6 @@ import PrayerTimeScreen from './PrayerTimeScreen'
 //Alquran
 import SurahScreen from './SurahScreen'
 import DetailSurahScreen from './DetailSurahScreen'
+import AlQuranScreen from './AlQuranScreen'
 
-export{SplashScreen,HomeScreen,PrayerTimeScreen,SurahScreen,DetailSurahScreen}
+export{SplashScreen,HomeScreen,PrayerTimeScreen,SurahScreen,DetailSurahScreen,AlQuranScreen}

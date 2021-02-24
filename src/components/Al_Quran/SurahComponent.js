@@ -9,19 +9,20 @@ export default class SurahComponent extends Component {
             <ScrollView>
                 {this.props.dataSurah.map((listSurah) => {
                     return (
-                        <View key={listSurah.nomor}>
-                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('DetailSurahScreen')}>
+                        <View key={listSurah.number}>
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('DetailSurahScreen',{
+                            nomorAlQuran:listSurah.number
+                        })}>
                         <View style={{ flexDirection: "row", justifyContent: 'space-around',paddingVertical:18}}>
                             <View style={{ flex: 1, justifyContent: 'center' }}>
-                                <Text style={{ textAlign: 'center', fontSize: 18 }}>{listSurah.nomor}</Text>
+                                <Text style={{ textAlign: 'center', fontSize: 18 }}>{listSurah.number}</Text>
                             </View>
                             <View style={{ flex: 2, justifyContent: 'center' }}>
-                                <Text style={{ textAlign: 'center', fontSize: 14 }}>{listSurah.name}</Text>
-                                <Text style={{ textAlign: 'center', fontSize: 14 }}>{listSurah.arti}</Text>
+                                <Text style={{ textAlign: 'left', fontSize: 14 }}>{listSurah.name.transliteration.id}</Text>
+                                <Text style={{ textAlign: 'left', fontSize: 14 }}>{listSurah.name.translation.id}</Text>
                             </View>
-                            <View style={{ flex: 1 }} />
                             <View style={{ flex: 1, justifyContent: 'center' }}>
-                                <Text style={{ textAlign: 'center', fontSize: 15 }}>{listSurah.type}</Text>
+                                <Text style={{ textAlign: 'center', fontSize: 13 }}>{listSurah.revelation.id}</Text>
                             </View>
                         </View>
                         </TouchableOpacity>

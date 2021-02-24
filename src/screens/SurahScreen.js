@@ -20,7 +20,7 @@ export default class SurahScreen extends Component {
         const result = getAllSurah()
         .then(res=>{
             console.log("gettAllSurah : " + res.data.status)
-            this.setState({dataSurah:res.data.hasil})
+            this.setState({dataSurah:res.data.data})
             this.setState({isLoading:false})
         })
     }

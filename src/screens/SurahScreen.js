@@ -25,8 +25,16 @@ export default class SurahScreen extends Component {
         })
     }
 
+    _isMounted = false
     componentDidMount(){
-        this.getAllSurah()
+        this._isMounted=true
+        if (this._isMounted === true) {
+            this.getAllSurah()    
+        }
+    }
+
+    componentWillUnmount(){
+        this._isMounted=false
     }
 
     render() {

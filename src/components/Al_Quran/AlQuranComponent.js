@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Button, FlatList, ScrollView, Text, TouchableOpacity, View } from 'react-native'
+import { Alert, Button, FlatList, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 
 import Sound from 'react-native-sound'
 import RBSheet from 'react-native-raw-bottom-sheet'
+import {MMKV} from 'react-native-mmkv'
 import { mainColor } from '../../const/color'
 
 export default class AlQuranComponents extends Component {
@@ -11,7 +12,11 @@ export default class AlQuranComponents extends Component {
         super(props)
         this.state = {
             isSurahPlay: false,
-            idProps: ""
+            idSurah: "",
+            idSurahLastRead:"",
+            temporaryIdSurahLastRead:"",
+            // isLastSurahPressed:false,
+            nameSurah:""
         }
     }
 
@@ -22,7 +27,7 @@ export default class AlQuranComponents extends Component {
             if (err) {
                 console.log("sound error")
             }
-            this.setState({ idProps: idProp })
+            this.setState({ idSurah: idProp })
             this._track.play((success) => {
                 if (success) {
                     console.log('successfully finished playing');
@@ -37,13 +42,38 @@ export default class AlQuranComponents extends Component {
         this._track.stop()
     }
 
+    alertLastRead = (idSurahLastRead) =>{
+        Alert.alert(
+            `${this.state.nameSurah}`,
+            `Tandai ayat ini sebagai terakhir dibaca `,
+            [
+                {
+                    text: "Cancel",
+                    onPress: () => console.log("Cancel Pressed"),
+                    style: "cancel"
+                },
+                { text: "OK", onPress: () => {
+                    this.setState({temporaryIdSurahLastRead:idSurahLastRead}),
+                    // this.setState({idSurahLastRead:null}), ==> BISA DIGUNAKAN,BISA TIDAK
+                    MMKV.set('idSurahLastRead',idSurahLastRead),
+                    MMKV.set('nameSurah',this.state.nameSurah)
+                    // MMKV.set('isLastSurahPressed',true)
+                    }
+                }
+            ],{cancelable: false }
+        )   
+    }
+
     renderItem = ({ item, index }) => {
         return (
             <View>
                 <TouchableOpacity onPress={() => this[RBSheet + index].open()}>
                 <View style={{ flexDirection: 'row' }}>
                     <View style={{ backgroundColor: 'red', flex: 1 }}>
-                        <View style={{ backgroundColor: mainColor, flex: 1, justifyContent: 'center' }}>
+                        <View style={{ 
+                            backgroundColor: (this.state.temporaryIdSurahLastRead == item.number.inSurah) ? 'red' :
+                            (this.state.idSurahLastRead == item.number.inSurah && this.state.nameSurah == MMKV.getString('nameSurah'))? 'blue' :
+                            mainColor, flex: 1, justifyContent: 'center' }}>
                             <Text style={{ textAlign: 'center', fontSize: 18, color: 'white' }}> {item.number.inSurah} </Text>
                         </View>
                     </View>
@@ -68,14 +98,14 @@ export default class AlQuranComponents extends Component {
                             >
                             
                             <View style={{flexDirection:'row',justifyContent:'space-between',paddingHorizontal:20,paddingVertical:20}}>
-                                <Text style={{fontWeight:'bold',fontSize:18}}>Pilih Aksi</Text>
+                                <Text style={{fontWeight:'bold',fontSize:18}}>Pilih aksi ayat {item.number.inSurah}</Text>
                                 <TouchableOpacity onPress={()=> this[RBSheet + index].close()}>
                                     <Text style={{fontSize:18}}>x</Text>
                                 </TouchableOpacity>
                             </View>
                             <ScrollView style={{paddingHorizontal:20}}>
                             {
-                                (this.state.idProps == item.number.inSurah && this.state.isSurahPlay == true) ?
+                                (this.state.idSurah == item.number.inSurah && this.state.isSurahPlay == true) ?
                                     <TouchableOpacity onPress={
                                         () => {
                                             this.stopSound(item.audio.primary, item.number.inSurah),
@@ -95,7 +125,9 @@ export default class AlQuranComponents extends Component {
                                     </TouchableOpacity>
                             }
                             <View style={{height:20}}/>
-                            <Text>Tandai sebagai terakhir dibaca</Text>
+                            <TouchableOpacity onPress={()=>{this.alertLastRead(item.number.inSurah)}}>
+                                <Text>Tandai sebagai terakhir dibaca</Text>
+                            </TouchableOpacity>
                             <View style={{height:20}}/>
                             <Text>Lihat tafsir</Text>
                             
@@ -110,13 +142,30 @@ export default class AlQuranComponents extends Component {
         )
     }
 
+    componentDidMount(){
+        const{nameSurah}=this.props
+        this.setState({idSurahLastRead:MMKV.getNumber('idSurahLastRead')})
+        // this.setState({isLastSurahPressed:MMKV.getBoolean('isLastSurahPressed')})
+        this.setState({nameSurah})
+        console.log(nameSurah)
+    }
+
     render() {
         return (
+            <View>
+            {this.props.isFirstBismillah != true ?
+            <View style={{backgroundColor:mainColor}}>
+                <Text style={{color:'white',fontSize:28,textAlign:'center',paddingVertical:10}}>بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</Text>
+            </View>    
+            :
+            <View></View>
+            }
             <FlatList
                 data={this.props.dataAlquran}
                 renderItem={this.renderItem}
                 keyExtractor={(item, index) => index.toString()}
-            />           
+            />    
+            </View>       
         )
     }
 }

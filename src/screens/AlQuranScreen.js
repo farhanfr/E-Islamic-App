@@ -11,7 +11,9 @@ export default class AlQuranScreen extends Component {
         super(props)
         this.state={
             dataAlquran:[],
-            isLoading:true
+            isLoading:true,
+            nameSurah:"",
+            isFirstBismillah:false
         }
     }
 
@@ -22,6 +24,10 @@ export default class AlQuranScreen extends Component {
             console.log("getDataAlquran : ", res.data.status)
             this.setState({dataAlquran:res.data.data.verses})
             this.setState({isLoading:false})
+            if ((res.data.data.verses[0].number.inSurah == 1 && res.data.data.verses[0].text.transliteration.en == "Bismillaahir Rahmaanir Raheem")) {
+                console.log("ayat pertama surat ini bismiilah")
+                this.setState({isFirstBismillah:true})
+            }
         })
     }
 
@@ -31,13 +37,17 @@ export default class AlQuranScreen extends Component {
         this.props.navigation.setOptions({
             title: nameSurah,
         })
+        this.setState({nameSurah})
     }
 
     render() {
         return (
             this.state.isLoading ? <ActivityIndicator size="large" color={mainColor} style={{flex:1,justifyContent:'center'}} /> :
             <SafeAreaView style={{backgroundColor:'white',flexGrow:1}}>
-                <AlQuranComponent dataAlquran={this.state.dataAlquran}/>
+                <AlQuranComponent 
+                dataAlquran={this.state.dataAlquran} 
+                nameSurah={this.state.nameSurah}
+                isFirstBismillah={this.state.isFirstBismillah}/>
             </SafeAreaView>
         )
     }

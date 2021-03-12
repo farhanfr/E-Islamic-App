@@ -15,7 +15,7 @@ export default class AlQuranComponents extends Component {
             idSurah: "",
             idSurahLastRead:"",
             temporaryIdSurahLastRead:"",
-            // isLastSurahPressed:false,
+            isLastSurahPressed:false,
             nameSurah:""
         }
     }
@@ -57,7 +57,7 @@ export default class AlQuranComponents extends Component {
                     // this.setState({idSurahLastRead:null}), ==> BISA DIGUNAKAN,BISA TIDAK
                     MMKV.set('idSurahLastRead',idSurahLastRead),
                     MMKV.set('nameSurah',this.state.nameSurah)
-                    // MMKV.set('isLastSurahPressed',true)
+                    MMKV.set('isLastSurahPressed',true)
                     }
                 }
             ],{cancelable: false }

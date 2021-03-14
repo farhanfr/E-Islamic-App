@@ -1,9 +1,19 @@
 import axios from "axios"
 
+import {MMKV} from 'react-native-mmkv'
 import {MAIN_API1,MAIN_API2} from '../store'
 
 const JadwalSholatServices = () =>{
-    const getAll = async() => await axios.get(`${MAIN_API1}/sholat/format/json/jadwal/kota/703/tanggal/2017-02-07`)
+    var date = new Date()
+    var year = date.getFullYear()
+    var month = date.getMonth()+1
+    var day = date.getDate()
+
+    var regionId = MMKV.getNumber('idRegionSetting')
+    // today=date.getDate() + "/"+parseInt(date.getMonth()+1)+"/"+date.getFullYear()
+    // const getAll= async()=>console.log(today)
+    const getAll = async() => await axios.get(`${MAIN_API1}/v1/sholat/jadwal/${regionId}/${year}/${month}/${day}`)
+    
     return{getAll}
 }
 

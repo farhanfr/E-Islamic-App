@@ -20,7 +20,7 @@ export default class PrayerTimeScreen extends Component {
         const result= await getAll()
         .then(res=>{
             var arrJadwalSholat = new Array(6)
-            const dataSholat=res.data.jadwal.data
+            const dataSholat=res.data.data.jadwal
             arrJadwalSholat[0] = {id:1,name:"Shubuh",time:dataSholat.subuh}
             arrJadwalSholat[1] = {id:2,name:"Terbit",time:dataSholat.terbit}
             arrJadwalSholat[2] = {id:3,name:"Dhuhur",time:dataSholat.dzuhur}
@@ -29,7 +29,8 @@ export default class PrayerTimeScreen extends Component {
             arrJadwalSholat[5] = {id:6,name:"Isya",time:dataSholat.isya}
             this.setState({dataJadwalSholat:arrJadwalSholat})
             this.setState({isLoading:false})
-            console.log(arrJadwalSholat)
+            // console.log(arrJadwalSholat)
+            console.log(dataSholat)
         })
     }
 

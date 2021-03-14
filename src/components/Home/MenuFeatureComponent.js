@@ -14,7 +14,7 @@ export default class MenuFeatureComponent extends Component {
                     <MenusFeatureComponent title="Toko Halal" icon={require('../../assets/icon/story.png')}/>
                     <MenusFeatureComponent title="Cari Masjid" icon={require('../../assets/icon/story.png')}/>
                     <MenusFeatureComponent title="Arah Kiblat" icon={require('../../assets/icon/story.png')}/>
-                    <MenusFeatureComponent title="Lainnya" icon={require('../../assets/icon/story.png')}/>
+                    <MenusFeatureComponent title="Pengaturan" icon={require('../../assets/icon/settings.png')} navigation={this.props.navigation} routeName="SettingsScreen"/>
                 </View>
             </View>
         )

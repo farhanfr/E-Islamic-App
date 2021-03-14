@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 
 import {createStackNavigator} from '@react-navigation/stack'
-import {SplashScreen,HomeScreen,PrayerTimeScreen,SurahScreen,DetailSurahScreen,AlQuranScreen} from '../screens'
+import {SplashScreen,HomeScreen,PrayerTimeScreen,SurahScreen,DetailSurahScreen,AlQuranScreen,SettingsScreen,ListRegionScreen} from '../screens'
 import {mainColor} from '../const/color'
 
 const Stack = createStackNavigator()
@@ -62,6 +62,30 @@ export const Router = () =>{
             component={AlQuranScreen}
             options={({navigation})=>(
                 {
+                    headerStyle:{
+                        backgroundColor:mainColor
+                    }
+                }
+            )}
+             />
+            <Stack.Screen 
+            name="SettingsScreen" 
+            component={SettingsScreen}
+            options={({navigation})=>(
+                {
+                    headerTitle:'Pengaturan',
+                    headerStyle:{
+                        backgroundColor:mainColor
+                    }
+                }
+            )}
+             />
+            <Stack.Screen 
+            name="ListRegionScreen" 
+            component={ListRegionScreen}
+            options={({navigation})=>(
+                {
+                    headerTitle:'Pengaturan Daerah',
                     headerStyle:{
                         backgroundColor:mainColor
                     }

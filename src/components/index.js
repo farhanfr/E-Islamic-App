@@ -10,6 +10,10 @@ import PrayerTimeComponent from './Prayer_Time/PrayerTimeComponent'
 import SurahComponent from './Al_Quran/SurahComponent'
 import DetailSurahComponent from './Al_Quran/DetailSurahComponent'
 import AlQuranComponent from './Al_Quran/AlQuranComponent'
+//Setting
+import SettingsComponent from './Settings/SettingsComponent'
+import ListRegionComponent from './Settings/ListRegionComponent'
+
 
 export{
     HeaderHomeComponent,
@@ -20,5 +24,7 @@ export{
     PrayerTimeComponent,
     SurahComponent,
     DetailSurahComponent,
-    AlQuranComponent
+    AlQuranComponent,
+    SettingsComponent,
+    ListRegionComponent
 }

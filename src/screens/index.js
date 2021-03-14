@@ -5,5 +5,8 @@ import PrayerTimeScreen from './PrayerTimeScreen'
 import SurahScreen from './SurahScreen'
 import DetailSurahScreen from './DetailSurahScreen'
 import AlQuranScreen from './AlQuranScreen'
+//Settings
+import SettingsScreen from './SettingsScreen'
+import ListRegionScreen from './ListRegionScreen'
 
-export{SplashScreen,HomeScreen,PrayerTimeScreen,SurahScreen,DetailSurahScreen,AlQuranScreen}
+export{SplashScreen,HomeScreen,PrayerTimeScreen,SurahScreen,DetailSurahScreen,AlQuranScreen,SettingsScreen,ListRegionScreen}
